@@ -1,0 +1,142 @@
+.dark-theme {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.dark-theme .card {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-theme .card-header {
+    background-color: #363636;
+    border-bottom-color: #404040;
+}
+
+.dark-theme .table {
+    color: #ffffff;
+}
+
+.dark-theme .table-light {
+    background-color: #363636;
+    color: #ffffff;
+}
+
+.dark-theme .table-hover tbody tr:hover {
+    background-color: #404040;
+    color: #ffffff;
+}
+
+.dark-theme .text-dark {
+    color: #ffffff !important;
+}
+
+.dark-theme .form-control,
+.dark-theme .form-select {
+    background-color: #363636;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+.dark-theme .form-control:focus,
+.dark-theme .form-select:focus {
+    background-color: #404040;
+    border-color: #505050;
+    color: #ffffff;
+}
+
+.dark-theme .btn-outline-primary {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.dark-theme .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: #ffffff;
+}
+
+.avatar-md {
+    width: 48px;
+    height: 48px;
+}
+
+.bg-primary-subtle {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.bg-info-subtle {
+    background-color: rgba(13, 202, 240, 0.1);
+}
+
+.bg-warning-subtle {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+.bg-success-subtle {
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.toast {
+    z-index: 1050;
+}
+
+.toast.success {
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+
+.toast.error {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+.toast.warning {
+    background-color: #fff3cd;
+    border-color: #ffecb5;
+}
+
+.toast.info {
+    background-color: #cff4fc;
+    border-color: #b6effb;
+}
+
+.dark-theme .toast {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #ffffff;
+}
+
+.table-responsive {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.dark-theme .table-responsive::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+.dark-theme .table-responsive::-webkit-scrollbar-thumb {
+    background: #404040;
+}
+
+.dark-theme .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #505050;
+}

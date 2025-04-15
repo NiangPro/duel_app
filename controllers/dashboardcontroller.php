@@ -6,7 +6,7 @@ if (!isset($_SESSION["user"])) {
 
 require_once("views/includes/entete.php");
 require_once("views/includes/navbar.php");
-require_once("views/dashboard.php");
+require_once("views/admin/dashboard.php");
 require_once("views/includes/footer.php");
 
 
