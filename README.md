@@ -1,74 +1,51 @@
-# Login cover template for Bootstrap 5
+# Application de Gestion de Défis
 
+Une application web permettant de gérer des défis, des cohortes, des matchs et des tirages.
 
-These templates were built with a **free Material Design UI Kit for the latest Bootstrap 5**.
+## Prérequis
 
-<img height="25" src="https://mdbootstrap.com/img/Marketing/general/logo/medium/mdb-r.png">  [![GitHub Stars](https://img.shields.io/github/stars/mdbootstrap/mdb-ui-kit?label=Star%20now&style=social)](https://github.com/mdbootstrap/mdb-ui-kit/)
+- PHP
+- MySQL
+- XAMPP (ou un serveur web compatible)
 
-<a href="https://npmcharts.com/compare/mdbootstrap?minimal=true"> <img src="https://img.shields.io/npm/dm/mdbootstrap.svg?label=MDB%20Downloads" alt="Downloads"></a>
-<a href="https://github.com/mdbootstrap/bootstrap-material-design/blob/master/License.pdf"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
-<a href="https://twitter.com/intent/tweet/?text=Thanks+@mdbootstrap+for+creating+amazing+and+free+Material+Design+for+Bootstrap+4+UI+KIT%20https://mdbootstrap.com/docs/jquery/&hashtags=javascript,code,webdesign,bootstrap"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Let%20us%20know%20you%20were%20here%21&"></a>
-<a href="https://www.youtube.com/watch?v=c9B4TPnak1A&t=6s"><img alt="YouTube Video Views" src="https://img.shields.io/youtube/views/c9B4TPnak1A?label=Bootstrap%205%20Tutorial%20Views&style=social"></a>
-___
+## Installation
 
-<table>
-  <tbody>
-    <tr>
-      <td>
-          <a href="https://mdbootstrap.com/freebies/login-page/" alt="Bootstrap 5" rel="dofollow">
-          		<img src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/content/en/_mdb5/standard/freebies/login-page/assets/featured.jpg">
-          </a>
-      </td>
-      <td>
-        <ul>
-        <li><b>Built with the free MDB5 UI Kit</b></li>
-         <li>Super simple, 1 minute implementation</li>
-         <li><b>Plain javascript (but works also with jQuery)</b></li>
-         <li>Use in your design and create amazing things</li>
-         <li><b>MIT license - free for personal & commercial use</b></li>
-          <li><b><a href="https://mdbootstrap.com/snippets/standard/mdbootstrap/2515540">Live Demo</a></b></li>
-        </ul>
-      </td>
-    </tr>
-   </tbody>
-</table>
+1. Clonez ce dépôt dans votre répertoire htdocs de XAMPP
+2. Importez le fichier `duel_app.sql` dans votre base de données MySQL
+3. Configurez les paramètres de connexion à la base de données dans `models/database.php`
+4. Accédez à l'application via votre navigateur
 
+## Structure du Projet
 
-___
+```
+├── controllers/          # Contrôleurs de l'application
+├── models/              # Modèles et connexion base de données
+├── views/               # Vues de l'application
+│   ├── challenge/       # Vues liées aux défis
+│   ├── cohorte/        # Vues liées aux cohortes
+│   ├── match/          # Vues liées aux matchs
+│   └── includes/       # Éléments communs (navbar, footer...)
+├── css/                # Fichiers CSS (MDB)
+├── js/                 # Fichiers JavaScript
+└── img/                # Images du projet
+```
 
-###### Discover tutorials for the latest Bootstrap 5 and learn how to create templates yourself.
+## Fonctionnalités
 
-**[>> Click here for a written tutorial](https://mdbootstrap.com/docs/standard/getting-started/quick-start/)**
+- Système d'authentification (login/logout)
+- Gestion des cohortes
+- Création et gestion des défis
+- Système de matchs
+- Fonctionnalité de tirage
+- Interface utilisateur avec Material Design Bootstrap
 
+## Technologies Utilisées
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-          		<img src="https://mdbootstrap.com/wp-content/uploads/2020/12/learnmore-1.png">
-          </a>
-      </td>
-      <td>
-          <a href="https://mdbootstrap.com/docs/standard/bootstrap-5-tutorial/#section-beginner" alt="Bootstrap 5" rel="dofollow">
-          		<img src="https://mdbootstrap.com/wp-content/uploads/2020/12/cover-bootstrap-5-1.png">
-          </a>
-      </td>
-    </tr>
-     <tr>
-        <td align="center">
-          <p align="center"><b>Start to Code</b></p>
-          <a href="https://mdbootstrap.com/docs/standard/bootstrap-5-tutorial/#section-beginner" alt="Bootstrap 5" rel="dofollow">
-          		<img src="https://mdbootstrap.com/wp-content/uploads/2020/12/Screenshot_26.png">
-          </a>
-         </td>
-        <td align="center">
-          <p align="center"><b>Learn Bootstrap 5 | Crash Course for Beginners in 1.5H</b></p>
-          <a href="https://mdbootstrap.com/docs/standard/bootstrap-5-tutorial/#section-beginner" alt="Bootstrap 5" rel="dofollow">
-          		<img src="https://mdbootstrap.com/wp-content/uploads/2020/12/Screenshot_26.png">
-          </a>
-         </td>
-      </tr>
-   </tbody>
-</table>
+- PHP (Backend)
+- MySQL (Base de données)
+- Material Design Bootstrap (Frontend)
+- JavaScript
 
-___
+## Licence
+
+Ce projet est sous licence MIT.
