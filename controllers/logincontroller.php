@@ -1,10 +1,12 @@
 <?php 
+require_once("views/includes/fonctions.php");
+require_once("models/database.php");
 
 if (isset($_POST["login"])) {
     extract($_POST);
 
-    $user = seconnecter($email);
-    if ($user && password_verify($mdp, $user->mdp)) {
+    $user = seconnecter($email, $mdp);
+    if ($user) {
         $_SESSION["user"] = $user;
         return header("Location:?page=dashboard");
     }else{

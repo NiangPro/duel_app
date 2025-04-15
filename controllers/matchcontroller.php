@@ -1,10 +1,18 @@
 <?php 
 
+require_once("models/database.php");
+require_once("views/includes/fonctions.php");
+
 if (!isset($_SESSION["user"])) {
     return header("Location:?page=home");
 }
 
 if (isset($_POST["afficher"])) {
+    if (!isset($_POST['csrf_token']) || !SecurityConfig::validateCsrfToken($_POST['csrf_token'])) {
+        setmessage("Token de sécurité invalide", "danger");
+        return header("Location:?page=match");
+    }
+
     extract($_POST);
 
     if (notEmpty([$challenge])) {

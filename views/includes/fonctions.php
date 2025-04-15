@@ -68,3 +68,20 @@ function niveauChallenge($idchallenges){
         return "Tour préliminaire";
     }
 }
+
+function seconnecter($email, $password) {
+    try {
+        $db = Database::getInstance();
+        $q = $db->prepare("SELECT * FROM users WHERE email = :email");
+        $q->execute(["email" => $email]);
+        $user = $q->fetch();
+        
+        if ($user && password_verify($password, $user->mdp)) {
+            return $user;
+        }
+        return false;
+    } catch (PDOException $th) {
+        setmessage("Erreur: ".$th->getMessage(), "danger");
+        return false;
+    }
+}

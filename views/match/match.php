@@ -7,6 +7,7 @@
     </div>
     <?php require_once("views/includes/getmessage.php"); ?>
     <form class="" method="post">
+                <input type="hidden" name="csrf_token" value="<?= SecurityConfig::generateCsrfToken() ?>">
                 <div data-mdb-input-init class="form-group mb-4">
                     <label  for="inlineFormSelectPref">Challenges</label>
                     <select data-mdb-select-init name="challenge" class="form-control select">

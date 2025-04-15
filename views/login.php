@@ -5,6 +5,7 @@
           <div class="row justify-content-center">
             <div class="col-xl-5 col-md-8">
               <form method="post" autocomplete="off" class="bg-white rounded shadow-5-strong p-5">
+                <input type="hidden" name="csrf_token" value="<?php echo CSRF_TOKEN; ?>">
                 <!-- Email input -->
                 <div class="form-outline mb-4" data-mdb-input-init>
                   <input type="email" name="email" id="form1Example1" class="form-control" />
