@@ -28,6 +28,8 @@
   </div>
 </div>
 
+<?php if(isset($_GET["type"]) && $_GET["type"] == "edit"): ?>
+
 <div class="card container col-md-10 mt-5 mb-5">
     <div class="card-body">
         <div class="row mb-3">
@@ -91,5 +93,8 @@
 </div>
 
 <?php require_once("views/cohorte/addapprenant.php"); ?>
+
+<?php endif; ?>
+
 
 
