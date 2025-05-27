@@ -26,6 +26,49 @@ function seconnecter($email){
     }
 }
 
+function apprenants(){
+    global $db;
+
+    try {
+        $q = $db->prepare("SELECT prenom, p.nom as nom, p.id as id, c.nom as nomcohorte, tel
+         FROM apprenants p, cohortes c WHERE p.cohorte_id = c.id  ORDER BY p.nom ASC");
+        $q->execute();
+
+        return $q->fetchAll();
+    } catch (PDOException $th) {
+        setmessage("Erreur: ".$th->getMessage()." a la ligne: ".__LINE__, "danger");
+    }
+}
+
+function supprimerApprenant($id){
+    global $db;
+
+    try {
+        $q = $db->prepare("DELETE FROM apprenants WHERE id =:id");
+        return $q->execute(["id" => $id]);
+
+    } catch (PDOException $th) {
+        setmessage("Erreur: ".$th->getMessage()." a la ligne: ".__LINE__, "danger");
+    }
+}
+
+function ajouterApprenant($prenom, $nom, $tel, $cohorte_id){
+    global $db;
+
+    try {
+        $q = $db->prepare("INSERT INTO apprenants(prenom, nom, tel, cohorte_id) VALUES(:prenom, :nom, :tel, :cohorte_id)");
+        return $q->execute([
+            "prenom" => ucfirst($prenom),
+            "nom" => ucfirst($nom),
+            "cohorte_id" => $cohorte_id,
+            "tel" => $tel,
+        ]);
+
+    } catch (PDOException $th) {
+        setmessage("Erreur: ".$th->getMessage()." a la ligne: ".__LINE__, "danger");
+    }
+}
+
 function participants($idchallenge){
     global $db;
 
