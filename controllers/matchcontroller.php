@@ -17,7 +17,7 @@ if (isset($_POST["afficher"])) {
 
 if (isset($_GET["gagnant"]) && isset($_GET["match"])) {
     if (gagner($_GET["match"], $_GET["gagnant"])) {
-        $p = participant($_GET["gagnant"]);
+        $p = apprenant($_GET["gagnant"]);
         setmessage("Félicitations à {$p->prenom} {$p->nom} de la {$p->nomcohorte}");
         return header("Location:?page=match&challenge=".$_GET["challenge"]);
     }
@@ -32,14 +32,55 @@ if (isset($_GET["next"])) {
         if (changerStatut($challenge->id, 2)) {
             $nom = count($matches) == 2 ? $challenge->nom."_final" : $challenge->nom."_1";
             $parent_id = $challenge->parent_id ?:$challenge->id;
-            if (ajouterChallenge($nom, $challenge->debut, 1)) {
+            if (ajouterChallenge($nom, $challenge->debut, 1, $parent_id)) {
                 $last = challenges()[0];
                 foreach ($matches as $m) {
-                    $p = participant($m->gagnant_id);
-                    ajouterParticipant($p->prenom, $p->nom, $p->cohorte_id, $last->id);
+                    ajouterParticipant($m->gagnant_id, $last->id);
                 }
     
-                setmessage("{$last->nom} a été créé pour le tour suivant");
+                $mats = matches($last->id);
+
+                if (count($mats) > 0) {
+                    setmessage("Il y a des matches en cours", "warning");
+                }else{
+                    $teams = participants($last->id);
+            
+                    if (count($teams) > 0) {
+                        // Mélanger aléatoirement les équipes
+                        shuffle($teams);
+                        
+                        /// Vérifier si le nombre d'équipes est impair
+                        $bye_team = null;
+                        if (count($teams) % 2 !== 0) {
+                            // Sélectionner une équipe aléatoire qui passe directement au tour suivant
+                            $bye_team = array_pop($teams);
+                        }
+            
+                        // Former les matchs
+                        $matches = array_chunk($teams, 2);
+                        // print_r($bye_team);
+                        // die();
+            
+            
+                        foreach ($matches as $match) {
+                            ajouterMatch($match[0]->apprenant_id, $match[1]->apprenant_id, $last->id);
+                        }
+            
+                        // Afficher l'équipe qui passe directement au tour suivant
+                        if ($bye_team) {
+                            ajouterMatch($bye_team->apprenant_id, null, $last->id, $bye_team->apprenant_id, 1);
+            
+                            setmessage("Tirage effectué, {$bye_team->prenom} {$bye_team->nom} est automatiquement qualifié(e) pour le prochain tour.");
+            
+                        }else{
+                            setmessage("Tirage effectué");
+                        }
+                    }else{
+                        setmessage("Aucun participant pour le moment", "danger");
+                    }
+                
+                    
+                }
                 return header("Location:?page=challenge&type=edit&id=$last->id");
             }
         }

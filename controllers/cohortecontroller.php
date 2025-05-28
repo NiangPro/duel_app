@@ -54,7 +54,7 @@ if (isset($_GET["type"])) {
         $c = cohorte($_GET["id"]);
     }
 
-    $apprenants = apprenants();
+    $apprenants = apprenantsCohorte($_GET["id"]);
     require_once("views/cohorte/add.php");
 }else{
     require_once("views/cohorte/cohorte.php");

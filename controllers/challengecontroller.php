@@ -22,8 +22,8 @@ if (isset($_POST["ajouter"])) {
 if (isset($_POST["ajouterParticipant"])) {
     extract($_POST);
 
-    if (notEmpty([$prenom, $nom, $cohorte_id])) {
-        if (ajouterParticipant($prenom, $nom, $cohorte_id, $_GET["id"])) {
+    if (notEmpty([$apprenant_id])) {
+        if (ajouterParticipant($apprenant_id, $_GET["id"])) {
             setmessage("Ajout participant avec succès");
             return header("Location:?page=challenge&type=edit&id=".$_GET["id"]);
         }
@@ -87,12 +87,12 @@ if (isset($_GET["tirer"])) {
 
 
             foreach ($matches as $match) {
-                ajouterMatch($match[0]->id, $match[1]->id, $_GET["id"]);
+                ajouterMatch($match[0]->apprenant_id, $match[1]->apprenant_id, $_GET["id"]);
             }
 
             // Afficher l'équipe qui passe directement au tour suivant
             if ($bye_team) {
-                ajouterMatch($bye_team->id, null, $_GET["id"], $bye_team->id, 1);
+                ajouterMatch($bye_team->apprenant_id, null, $_GET["id"], $bye_team->apprenant_id, 1);
 
                 setmessage("Tirage effectué, {$bye_team->prenom} {$bye_team->nom} est automatiquement qualifié(e) pour le prochain tour.");
 
@@ -105,7 +105,6 @@ if (isset($_GET["tirer"])) {
     
         
     }
-    
 
     return header("Location:?page=challenge");
 
@@ -116,8 +115,8 @@ if (isset($_GET["idgagnant"])) {
 }
 
 
+$apprenants = apprenants();
 $challenges = challenges();
-$cohortes = cohortes();
 
 require_once("views/includes/entete.php");
 require_once("views/includes/navbar.php");
@@ -131,7 +130,7 @@ if (isset($_GET["type"])) {
            $matches = matches($last->id);
            if (count($matches) == 1) {
             if ($matches[0]->statut == 1) {
-                $gagnant = participant($matches[0]->gagnant_id);
+                $gagnant = apprenant($matches[0]->gagnant_id);
             }
            }
         }

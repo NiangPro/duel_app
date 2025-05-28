@@ -10,35 +10,27 @@
     <?php require_once("views/includes/getmessage.php"); ?>
     <form class="" method="post">
         <div class="row">
-            <div class="col-md-6">
- <!-- Email input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" value="<?= getInputData('prenom', isset($p) ? $p : '') ?>" name="prenom" id="form1Example1" class="form-control" />
-                    <label class="form-label" for="form1Example1">Prenom</label>
-                </div>
-            </div>
-            <div class="col-md-6">
-            <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" value="<?= getInputData('nom', isset($p) ? $p : '') ?>" name="nom" id="form1Example1" class="form-control" />
-                    <label class="form-label" for="form1Example1">Nom</label>
-                </div>
-            </div>
-            <div data-mdb-input-init class="form-group mb-4">
-                <label  for="inlineFormSelectPref">Cohorte</label>
-                <select data-mdb-select-init name="cohorte_id" class="form-control select">
-                    <option value="">Veuillez choisir la cohorte</option>    
-                    <?php foreach($cohortes as $co): ?>
-                        <option value="<?= $co->id ?>"><?= $co->nom ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
             
+            <div class="col-md-8">
+           
+                <div data-mdb-input-init class="form-group mb-4">
+                    <label  for="inlineFormSelectPref">Apprenant</label>
+                    <select data-mdb-select-init name="apprenant_id" class="form-control select">
+                        <option value="">Veuillez choisir l'apprenant</option>    
+                        <?php foreach($apprenants as $a): ?>
+                            <option value="<?= $a->id ?>"><?= $a->prenom ?> <?= $a->nom ?> (<?= $a->nomcohorte ?>)</option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <?php if(isset($p)): ?>
+                    <button data-mdb-ripple-init name="modifier" type="submit" class="btn btn-warning mt-4">Modifier</button>
+                <?php else: ?>
+                    <button data-mdb-ripple-init name="ajouterParticipant" type="submit" class="btn btn-success mt-4">Ajouter</button>
+                <?php endif; ?>
+            </div>
         </div>
-        <?php if(isset($p)): ?>
-            <button data-mdb-ripple-init name="modifier" type="submit" class="btn btn-warning">Modifier</button>
-        <?php else: ?>
-            <button data-mdb-ripple-init name="ajouterParticipant" type="submit" class="btn btn-success">Ajouter</button>
-        <?php endif; ?>
     </form>
   </div>
 </div>

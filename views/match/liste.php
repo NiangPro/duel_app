@@ -17,7 +17,7 @@
                         <div class="card <?php if(count($matches) == 1 && $m->statut == 1){ echo 'bg-info text-white';}else if($m->statut == 1){ echo 'bg-dark text-white';}else{ echo '';}  ?>">
                             <div class="card-body text-center">
                                 <p>
-                                    <?= $m->statut == 0 ? afficheParticipant(participant($m->id_part1)) : afficheParticipant(participant($m->gagnant_id)) ?>
+                                    <?= $m->statut == 0 ? afficheParticipant(apprenant($m->id_part1)) : afficheParticipant(apprenant($m->gagnant_id)) ?>
                                     <?php if ($m->statut == 0): ?>
                                     <br><a href="?page=match&challenge=<?= $_GET['challenge'] ?>&match=<?= $m->id ?>&gagnant=<?= $m->id_part1 ?>" class="btn btn-success btn-sm rounded-pill"><i class="fa fa-check" title="gagner"></i></a>
                                     <?php endif; ?>
@@ -25,7 +25,7 @@
                                 <?php if ($m->id_part2 && $m->statut == 0): ?>
                                         <h5>Vs</h5>
                                         <p>
-                                            <?= afficheParticipant(participant($m->id_part2)) ?>
+                                            <?= afficheParticipant(apprenant($m->id_part2)) ?>
                                             <?php if ($m->statut == 0): ?>
                                                 <br><a href="?page=match&challenge=<?= $_GET['challenge'] ?>&match=<?= $m->id ?>&gagnant=<?= $m->id_part2 ?>" class="btn btn-success btn-sm rounded-pill"><i class="fa fa-check" title="gagner"></i></a>
                                             <?php endif; ?>

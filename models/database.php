@@ -26,6 +26,19 @@ function seconnecter($email){
     }
 }
 
+function apprenantsCohorte($cohorte_id){
+    global $db;
+
+    try {
+        $q = $db->prepare("SELECT prenom, p.nom as nom, p.id as id, c.nom as nomcohorte, tel
+         FROM apprenants p, cohortes c WHERE p.cohorte_id = c.id AND c.id = :cohorte_id  ORDER BY p.nom ASC");
+        $q->execute(["cohorte_id" => $cohorte_id]);
+
+        return $q->fetchAll();
+    } catch (PDOException $th) {
+        setmessage("Erreur: ".$th->getMessage()." a la ligne: ".__LINE__, "danger");
+    }
+}
 function apprenants(){
     global $db;
 
@@ -35,6 +48,20 @@ function apprenants(){
         $q->execute();
 
         return $q->fetchAll();
+    } catch (PDOException $th) {
+        setmessage("Erreur: ".$th->getMessage()." a la ligne: ".__LINE__, "danger");
+    }
+}
+
+function apprenant($id){
+    global $db;
+
+    try {
+        $q = $db->prepare("SELECT prenom, p.nom as nom, p.id as id, c.nom as nomcohorte, tel, cohorte_id
+         FROM apprenants p, cohortes c WHERE p.cohorte_id = c.id AND p.id = :id  ORDER BY p.nom ASC");
+        $q->execute(["id" => $id]);
+
+        return $q->fetch();
     } catch (PDOException $th) {
         setmessage("Erreur: ".$th->getMessage()." a la ligne: ".__LINE__, "danger");
     }
@@ -73,8 +100,10 @@ function participants($idchallenge){
     global $db;
 
     try {
-        $q = $db->prepare("SELECT prenom, p.nom as nom, p.id as id, c.nom as nomcohorte
-         FROM participant p, cohortes c WHERE p.cohorte_id = c.id AND p.challenge_id = :idchallenge ORDER BY p.id DESC");
+        $q = $db->prepare("SELECT prenom, a.nom as nom, p.id as id, c.nom as nomcohorte, a.id as apprenant_id
+         FROM participant p, apprenants a, cohortes c 
+         WHERE p.apprenant_id = a.id AND p.challenge_id = :idchallenge AND a.cohorte_id = c.id 
+         ORDER BY p.id DESC");
         $q->execute(["idchallenge" => $idchallenge]);
 
         return $q->fetchAll();
@@ -97,15 +126,13 @@ function participant($id){
     }
 }
 
-function ajouterParticipant($prenom, $nom, $cohorte_id, $challenge_id){
+function ajouterParticipant($apprenant_id, $challenge_id){
     global $db;
 
     try {
-        $q = $db->prepare("INSERT INTO participant(prenom, nom, cohorte_id, challenge_id) VALUES(:prenom, :nom, :cohorte_id, :challenge_id)");
+        $q = $db->prepare("INSERT INTO participant(apprenant_id, challenge_id) VALUES(:apprenant_id, :challenge_id)");
         return $q->execute([
-            "prenom" => ucfirst($prenom),
-            "nom" => ucfirst($nom),
-            "cohorte_id" => $cohorte_id,
+            "apprenant_id" => $apprenant_id,
             "challenge_id" => $challenge_id,
         ]);
 
@@ -288,15 +315,16 @@ function supprimerChallenge($id){
     }
 }
 
-function ajouterChallenge($nom, $debut, $statut = 0){
+function ajouterChallenge($nom, $debut, $statut = 0, $parent_id = null){
     global $db;
 
     try {
-        $q = $db->prepare("INSERT INTO challenges(nom, debut, statut) VALUES(:nom, :debut, :statut)");
+        $q = $db->prepare("INSERT INTO challenges(nom, debut, statut, parent_id) VALUES(:nom, :debut, :statut, :parent_id)");
         return $q->execute([
             "nom" => ucfirst($nom),
             "debut" => $debut,
             "statut" => $statut,
+            "parent_id" => $parent_id,
         ]);
 
     } catch (PDOException $th) {
